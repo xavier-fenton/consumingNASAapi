@@ -9,9 +9,8 @@ const App = () => {
 
   useEffect(() => {
     HttpClient.getApod().then((apodData) => {
-      const newData = apodData.data.photos.slice(800, 855)
-      setApod(newData)
-      
+      const newData = apodData.data.photos.slice(0, 900)
+      setApod(newData) 
     })
    
   }, [])
@@ -21,43 +20,42 @@ const App = () => {
   
   return (
   
-    <div style={{ maxWidth: 900, padding: 30 }}>
-      {/* <h1>NASA API</h1> */}
-      
-    
-      
-    {/* <div> */}
-    {apod && apod.map((data: { img_src: string ; id: React.Key | any, full_name: string }) => {
-      return (
-        <div id='wrap' >
-          {/* <h2>Name {data.full_name}</h2> */}
-          
-          <img src={data.img_src} id={data.id}alt="APOD" key={data.id}/>
-          
+    <div> 
+      <div className='wrap'>
+      {apod && apod.map((data: { img_src: string ; id: React.Key | any, full_name: string }) => {
 
-          
-            {/* <article>
-            <pre
-              style={{
-                overflowX: 'auto',
-                whiteSpace: 'pre-wrap',
-                wordWrap: 'break-word',
-              }}
-            >
-              <hr />
-              {JSON.stringify(apod, null, 2)}
-            </pre>
-          </article>  */}
-      
-        </div>
-        )
-    })
-          
+        return (
+          <div className='image-div'>
+            
+            
+            <img className='image' src={data.img_src} id={data.id}alt="APOD" key={data.id} />
+            
 
-     }
-  </div>
-    
+            
+              
+        
+          </div>
+          )
+      })
+            
+
+      }
+      </div>
+            <article>
+              <pre
+                style={{
+                  overflowX: 'auto',
+                  whiteSpace: 'pre-wrap',
+                  wordWrap: 'break-word',
+                }}
+              >
+                <hr />
+                {JSON.stringify(apod, null, 2)}
+              </pre>
+            </article> 
   
+    </div>
+    
 )
 }
 export default App
