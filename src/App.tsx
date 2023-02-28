@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import HttpClient from './HttpClient'
-
+import './App.css'
 
 
 const App = () => {
   const [apod, setApod] = useState<string | any>()
 
+
   useEffect(() => {
     HttpClient.getApod().then((apodData) => {
-      const newData = apodData.data.photos.slice(0, 300)
+      const newData = apodData.data.photos.slice(800, 855)
       setApod(newData)
-      // console.log('this us new data', newData) 
+      
     })
+   
   }, [])
 
  
@@ -27,11 +29,12 @@ const App = () => {
     {/* <div> */}
     {apod && apod.map((data: { img_src: string ; id: React.Key | any, full_name: string }) => {
       return (
-        <div>
+        <div id='wrap' >
           {/* <h2>Name {data.full_name}</h2> */}
-          <ul>
-          <img src={data.img_src} id={data.id}alt="APOD" width="auto" height="auto" key={data.id}/></ul>
           
+          <img src={data.img_src} id={data.id}alt="APOD" key={data.id}/>
+          
+
           
             {/* <article>
             <pre
