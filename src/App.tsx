@@ -8,12 +8,8 @@ const App = () => {
 
   useEffect(() => {
     HttpClient.getApod().then((apodData) => {
-      const thisArr = apodData.data.photos
-      const newData = thisArr.map((data) => {
-        return data
-        
-      })
-      setApod(newData)
+      const newData = apodData.data.photos
+      setApod(newData[0])
       console.log(newData) 
     })
   }, [])
@@ -26,15 +22,12 @@ const App = () => {
     <div style={{ maxWidth: 900, padding: 30 }}>
       {/* <h1>NASA API</h1>
       <h2>Astronomy Picture of the Day</h2> */}
-      {apod && 
-      apod.map((data) => {
-
-      return(
-
-        <article>
-         
-          <img src={data.img_src} id={data.id}alt="APOD" width="800" height="auto" />
-          {/* <p>{apod.explanation}</p> */}
+      {apod && apod.map((data) => { return (
+       <>
+         <div>
+          <img src={data.img_src} id={data.id}alt="APOD" width="800" height="auto" key={apod.id}/>
+          </div>
+          <article>
           <pre
             style={{
               overflowX: 'auto',
@@ -45,7 +38,12 @@ const App = () => {
             <hr />
             {JSON.stringify(apod, null, 2)}
           </pre>
-        </article>)})}
+        </article>
+        </>
+      )})
+      
+
+        }
       
     </div>
   )
