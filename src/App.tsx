@@ -8,9 +8,9 @@ const App = () => {
 
   useEffect(() => {
     HttpClient.getApod().then((apodData) => {
-      const newData = apodData.data.photos
-      setApod(newData[0])
-      console.log(newData) 
+      const newData = apodData.data.photos.slice(0, 300)
+      setApod(newData)
+      // console.log('this us new data', newData) 
     })
   }, [])
 
@@ -18,35 +18,43 @@ const App = () => {
     
   
   return (
-    
+  
     <div style={{ maxWidth: 900, padding: 30 }}>
-      {/* <h1>NASA API</h1>
-      <h2>Astronomy Picture of the Day</h2> */}
-      {apod && apod.map((data) => { return (
-       <>
-         <div>
-          <img src={data.img_src} id={data.id}alt="APOD" width="800" height="auto" key={apod.id}/>
-          </div>
-          <article>
-          <pre
-            style={{
-              overflowX: 'auto',
-              whiteSpace: 'pre-wrap',
-              wordWrap: 'break-word',
-            }}
-          >
-            <hr />
-            {JSON.stringify(apod, null, 2)}
-          </pre>
-        </article>
-        </>
-      )})
+      {/* <h1>NASA API</h1> */}
       
+    
+      
+    {/* <div> */}
+    {apod && apod.map((data: { img_src: string ; id: React.Key | any, full_name: string }) => {
+      return (
+        <div>
+          {/* <h2>Name {data.full_name}</h2> */}
+          <ul>
+          <img src={data.img_src} id={data.id}alt="APOD" width="auto" height="auto" key={data.id}/></ul>
+          
+          
+            {/* <article>
+            <pre
+              style={{
+                overflowX: 'auto',
+                whiteSpace: 'pre-wrap',
+                wordWrap: 'break-word',
+              }}
+            >
+              <hr />
+              {JSON.stringify(apod, null, 2)}
+            </pre>
+          </article>  */}
+      
+        </div>
+        )
+    })
+          
 
-        }
-      
-    </div>
-  )
+     }
+  </div>
+    
+  
+)
 }
-
 export default App
