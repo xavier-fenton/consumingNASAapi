@@ -29,6 +29,6 @@ axios.interceptors.request.use(
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getApod() {
-    return axios.get(`${nasaEndpoint}mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${nasaApiKey}`)
+    return axios.get(`${nasaEndpoint}/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${nasaApiKey}`)
   },
 }
