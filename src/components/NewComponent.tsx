@@ -26,7 +26,7 @@ const NewComponent = () => {
     <>
       <h1>NASA Image Data</h1>
       {data &&
-        data.map((data: {id: any} ) => {
+        data.map((data:{id?: string | any}) => {
           return (
             <>
               <img
