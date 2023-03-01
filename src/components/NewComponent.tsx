@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { setEnvironmentData } from 'worker_threads';
+
 
 
 const NewComponent = () => {
-  const [data, setData] = useState();
+  const [data, setData] : Array<any> = useState();
 
   
 
@@ -13,13 +13,39 @@ const NewComponent = () => {
     .then(response => response.json())
     .then((data) => {
       const collectedData = data.collection.items
-      setData(collectedData)
-      console.log(collectedData)
+      // setData(collectedData)
+      const mappedData = collectedData.map((data: {links: string}) => {
+        return data.links
+      })
+      const mappedData2 = mappedData.map((data: Array<string>) => {
+        
+        const firstIndex = data[0]
+        const intoIndex = firstIndex.href
+        return intoIndex
+      })
+     setData(mappedData2)
+    
+      
     })
   }, [])
 
 
-  return (<>hello</>  );
+  return (
+  
+  <>
+  <h1>NASA Image Data</h1>
+  {data && data.map((data) => {
+
+    return( 
+    <>
+    <img className='image' src={data} id={data.id}alt="APOD" key={data.id} />
+    </>)
+  })}
+  
+  
+  
+  </>  
+  );
 }
  
 export default NewComponent;
