@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 const NewComponent = () => {
   const [data, setData]: Array<any> = useState()
 
+  
   useEffect(() => {
     fetch('https://images-api.nasa.gov/search?q=space&media_type=image')
       .then((response) => response.json())
@@ -19,6 +20,8 @@ const NewComponent = () => {
           return intoIndex
         })
         setData(mappedData2)
+        
+
       })
   }, [])
 
